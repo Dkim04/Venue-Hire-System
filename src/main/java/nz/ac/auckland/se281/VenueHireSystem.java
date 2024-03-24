@@ -7,11 +7,18 @@ import nz.ac.auckland.se281.Types.FloralType;
 public class VenueHireSystem {
 
   // Added Fields
-  private int id;
   private ArrayList<String> venueNameList;
+  private ArrayList<String> venueCodeList;
+  private ArrayList<String> venueCapacityList;
+  private ArrayList<String> venueFeeList;
+  private int id;
 
   public VenueHireSystem() {
     venueNameList = new ArrayList<>();
+    venueCodeList = new ArrayList<>();
+    venueCapacityList = new ArrayList<>();
+    venueFeeList = new ArrayList<>();
+    id = 0;
   }
 
   public void printVenues() {
