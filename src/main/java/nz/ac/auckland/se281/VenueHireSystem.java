@@ -28,9 +28,14 @@ public class VenueHireSystem {
     }
   }
 
-  public void createVenue(
-      String venueName, String venueCode, String capacityInput, String hireFeeInput) {
-    // TODO implement this method
+  public void createVenue(String venueName, String venueCode, String capacityInput, String hireFeeInput) {
+    if (!venueName.isEmpty() && !venueCode.isEmpty() && !capacityInput.isEmpty() && !hireFeeInput.isEmpty()) {
+      venueNameList.add(id, venueName);
+      venueCodeList.add(id, venueCode);
+      venueCapacityList.add(id, capacityInput);
+      venueFeeList.add(id, hireFeeInput);
+      MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode);
+    }
   }
 
   public void setSystemDate(String dateInput) {
