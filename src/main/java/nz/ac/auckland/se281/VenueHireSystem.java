@@ -35,6 +35,8 @@ public class VenueHireSystem {
       venueCapacityList.add(id, capacityInput);
       venueFeeList.add(id, hireFeeInput);
       MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode);
+    } else if (venueName.isEmpty()) {
+      MessageCli.VENUE_NOT_CREATED_EMPTY_NAME.printMessage();
     }
   }
 
