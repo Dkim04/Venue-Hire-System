@@ -29,7 +29,9 @@ public class VenueHireSystem {
   }
 
   public void createVenue(String venueName, String venueCode, String capacityInput, String hireFeeInput) {
-    if (!venueName.isEmpty() && !venueCode.isEmpty() && !capacityInput.isEmpty() && !hireFeeInput.isEmpty()) {
+    if (Integer.parseInt(capacityInput) < 0) {
+      MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", " positive");
+    } else if (!venueName.isEmpty() && !venueCode.isEmpty() && !capacityInput.isEmpty() && !hireFeeInput.isEmpty()) {
       venueNameList.add(id, venueName);
       venueCodeList.add(id, venueCode);
       venueCapacityList.add(id, capacityInput);
