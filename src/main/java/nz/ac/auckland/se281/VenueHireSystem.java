@@ -96,7 +96,7 @@ public class VenueHireSystem {
       return;
     }
 
-    if (!venueCode.isEmpty()) {
+    if (!venueCode.isEmpty()) {                                                                                         // If venueCode is already in use for another venue
       for (int i = 0; i < venueNameList.size(); i++) {
         if (venueCode.equals(venueCodeList.get(i))) {
           MessageCli.VENUE_NOT_CREATED_CODE_EXISTS.printMessage(venueCodeList.get(i), venueNameList.get(i));
