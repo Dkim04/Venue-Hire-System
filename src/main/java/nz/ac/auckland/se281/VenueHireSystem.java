@@ -23,8 +23,68 @@ public class VenueHireSystem {
     // TODO implement this method
      if (venueNameList.isEmpty()) {                                                                                     // If there are no venues
       MessageCli.NO_VENUES.printMessage();
-    } if (venueNameList.size() == 1) {                                                                                  // If there is only one venue
+    } 
+    if (venueNameList.size() == 1) {                                                                                  // If there is only one venue
       MessageCli.NUMBER_VENUES.printMessage("is", "one", "");
+      for (int i = 0; i < venueNameList.size(); i++) {
+        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+      }
+    }
+    if (venueNameList.size() == 2) {                                                                                  // If there are two venues
+      MessageCli.NUMBER_VENUES.printMessage("are", "two", "s");
+      for (int i = 0; i < venueNameList.size(); i++) {
+        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+      }
+    }
+    if (venueNameList.size() == 3) {                                                                                  // If there are three venues
+      MessageCli.NUMBER_VENUES.printMessage("are", "three", "s");
+      for (int i = 0; i < venueNameList.size(); i++) {
+        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+      }
+    }
+    if (venueNameList.size() == 4) {                                                                                  // If there are four venues
+      MessageCli.NUMBER_VENUES.printMessage("are", "four", "s");
+      for (int i = 0; i < venueNameList.size(); i++) {
+        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+      }
+    }
+    if (venueNameList.size() == 5) {                                                                                  // If there are five venues
+      MessageCli.NUMBER_VENUES.printMessage("are", "five", "s");
+      for (int i = 0; i < venueNameList.size(); i++) {
+        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+      }
+    }
+    if (venueNameList.size() == 6) {                                                                                  // If there are six venues
+      MessageCli.NUMBER_VENUES.printMessage("are", "six", "s");
+      for (int i = 0; i < venueNameList.size(); i++) {
+        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+      }
+    }
+    if (venueNameList.size() == 7) {                                                                                  // If there are seven venues
+      MessageCli.NUMBER_VENUES.printMessage("are", "seven", "s");
+      for (int i = 0; i < venueNameList.size(); i++) {
+        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+      }
+    }
+    if (venueNameList.size() == 8) {                                                                                  // If there are eight venues
+      MessageCli.NUMBER_VENUES.printMessage("are", "eight", "s");
+      for (int i = 0; i < venueNameList.size(); i++) {
+        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+      }
+    }
+    if (venueNameList.size() == 9) {                                                                                  // If there are nine venues
+      MessageCli.NUMBER_VENUES.printMessage("are", "nine", "s");
+      for (int i = 0; i < venueNameList.size(); i++) {
+        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+      }
+    }
+    if (venueNameList.size() >= 10) {                                                                                 // If there are ten or more venues                  
+      String numberofVenues = String.valueOf(venueNameList.size());
+      MessageCli.NUMBER_VENUES.printMessage("are", numberofVenues, "s");
+      
+      for (int i = 0; i < venueNameList.size(); i++) {
+        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+      }
     }
   }
 
