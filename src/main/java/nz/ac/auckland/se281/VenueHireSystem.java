@@ -81,7 +81,7 @@ public class VenueHireSystem {
     if (venueNameList.size() >= 10) {                                                                                 // If there are ten or more venues                  
       String numberofVenues = String.valueOf(venueNameList.size());
       MessageCli.NUMBER_VENUES.printMessage("are", numberofVenues, "s");
-      
+
       for (int i = 0; i < venueNameList.size(); i++) {
         MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
       }
@@ -94,6 +94,15 @@ public class VenueHireSystem {
     } catch (Exception e) {
       MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("hire fee", "");
       return;
+    }
+
+    if (!venueCode.isEmpty()) {
+      for (int i = 0; i < venueNameList.size(); i++) {
+        if (venueCode.equals(venueCodeList.get(i))) {
+          MessageCli.VENUE_NOT_CREATED_CODE_EXISTS.printMessage(venueCodeList.get(i), venueNameList.get(i));
+          return;
+        }
+      }
     }
 
     if (Integer.parseInt(capacityInput) < 0) {                                                                          // If capacityInput is less than 0
