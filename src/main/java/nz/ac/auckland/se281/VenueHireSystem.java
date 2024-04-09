@@ -96,6 +96,13 @@ public class VenueHireSystem {
       return;
     }
 
+    try {                                                                                                               // If capacityInput is not an int number
+      Integer.parseInt(capacityInput);
+    } catch (Exception e) {
+      MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", "");
+      return;
+    }
+
     if (!venueCode.isEmpty()) {                                                                                         // If venueCode is already in use for another venue
       for (int i = 0; i < venueNameList.size(); i++) {
         if (venueCode.equals(venueCodeList.get(i))) {
@@ -107,6 +114,9 @@ public class VenueHireSystem {
 
     if (Integer.parseInt(capacityInput) < 0) {                                                                          // If capacityInput is less than 0
       MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", " positive");
+    }
+    else if (Integer.parseInt(hireFeeInput) < 0) {                                                                      // If hireFeeInput is less than 0
+      MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("hire fee", " positive");
     }
     else if (venueName.isEmpty()) {                                                                                     // If the venueName is empty
       MessageCli.VENUE_NOT_CREATED_EMPTY_NAME.printMessage();
