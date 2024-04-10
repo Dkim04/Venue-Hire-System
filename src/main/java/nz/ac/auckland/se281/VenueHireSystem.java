@@ -145,8 +145,18 @@ public class VenueHireSystem {
     }
   }
 
+// The system’s date must be set,
+// There must be at least one venue in the system,
+// The venue code must exist,
+// The venue must be available on the specified date, and
+// The booking date must not be in the past (today or later is OK in terms of the current system date).
+
   public void makeBooking(String[] options) {
-    // TODO implement this method
+    if (this.systemDate == null) {
+      MessageCli.BOOKING_NOT_MADE_DATE_NOT_SET.printMessage();
+    } else if (venueNameList.isEmpty()) {
+      MessageCli.BOOKING_NOT_MADE_NO_VENUES.printMessage();
+    }
   }
 
   public void printBookings(String venueCode) {
