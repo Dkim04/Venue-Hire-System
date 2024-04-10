@@ -11,6 +11,7 @@ public class VenueHireSystem {
   private ArrayList<String> venueCodeList;
   private ArrayList<String> venueCapacityList;
   private ArrayList<String> venueFeeList;
+  private String systemDate;
 
   public VenueHireSystem() {
     venueNameList = new ArrayList<>();
@@ -131,7 +132,8 @@ public class VenueHireSystem {
   }
 
   public void setSystemDate(String dateInput) {
-    // TODO implement this method
+    this.systemDate = dateInput;
+    MessageCli.DATE_SET.printMessage(this.systemDate);
   }
 
   public void printSystemDate() {
