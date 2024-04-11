@@ -16,6 +16,7 @@ public class VenueHireSystem {
   private ArrayList<String> bookingDateList;
   private ArrayList<String> emailList;
   private ArrayList<String> attendeesList;
+  private ArrayList<String> bookingReferenceList;
 
   public VenueHireSystem() {
     venueNameList = new ArrayList<>();
@@ -27,6 +28,7 @@ public class VenueHireSystem {
     bookingDateList = new ArrayList<>();
     emailList = new ArrayList<>();
     attendeesList = new ArrayList<>();
+    bookingReferenceList = new ArrayList<>();
   }
 
   public void printVenues() {
@@ -182,6 +184,7 @@ public class VenueHireSystem {
     } else {
       for (int i = 0; i < venueCodeList.size(); i++) {
         if (venueCodeList.get(i).equals(options[0])) {                                                                  // If there is venue with the given code
+          int tempindex = i;                                                                                            // Set a temporary index of where the venue is in the venue arraylist
           for (int j = 0; j < venueCodeBookinglist.size(); j++) {
             if (venueCodeBookinglist.get(j).equals(options[0])) {                                                       // Check if there is a booking for the given date
               if (bookingDateList.get(j).equals(options[1])) {
@@ -190,8 +193,18 @@ public class VenueHireSystem {
               }
             }
           }
+          String reference = BookingReferenceGenerator.generateBookingReference();
+          venueCodeBookinglist.add(options[0]);                                                                         // Adding the booking to the arraylists
+          bookingDateList.add(options[1]);
+          emailList.add(options[2]);
+          attendeesList.add(options[3]);
+          bookingReferenceList.add(reference);
+          MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(reference, venueNameList.get(tempindex), options[1], options[3]);
+          return;
         }
       }
+      System.out.println("g");
+      MessageCli.BOOKING_NOT_MADE_VENUE_NOT_FOUND.printMessage(options[0]);                                             // If there is no venue with the given code
     }
   }
 
