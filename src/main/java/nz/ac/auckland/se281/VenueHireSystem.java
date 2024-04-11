@@ -12,6 +12,10 @@ public class VenueHireSystem {
   private ArrayList<String> venueCapacityList;
   private ArrayList<String> venueFeeList;
   private String systemDate;
+  private ArrayList<String> venueCodeBookinglist;
+  private ArrayList<String> bookingDateList;
+  private ArrayList<String> emailList;
+  private ArrayList<String> attendeesList;
 
   public VenueHireSystem() {
     venueNameList = new ArrayList<>();
@@ -19,6 +23,10 @@ public class VenueHireSystem {
     venueCapacityList = new ArrayList<>();
     venueFeeList = new ArrayList<>();
     systemDate = null;
+    venueCodeBookinglist = new ArrayList<>();
+    bookingDateList = new ArrayList<>();
+    emailList = new ArrayList<>();
+    attendeesList = new ArrayList<>();
   }
 
   public void printVenues() {
@@ -152,10 +160,38 @@ public class VenueHireSystem {
 // The booking date must not be in the past (today or later is OK in terms of the current system date).
 
   public void makeBooking(String[] options) {
-    if (this.systemDate == null) {
+    String[] date1Parts = options[1].split("/");
+    String[] date2Parts = systemDate.split("/");
+
+    if (date1Parts[2].compareTo(date2Parts[2]) < 0) {                                                                   // If the year is earlier
+      MessageCli.BOOKING_NOT_MADE_PAST_DATE.printMessage(options[1], systemDate);
+      return;
+    } else if ((date1Parts[2] == date2Parts[2]) && (date1Parts[1].compareTo(date2Parts[1]) < 0)) {                      // If the year is the same but the month is earlier
+      MessageCli.BOOKING_NOT_MADE_PAST_DATE.printMessage(options[1], systemDate);
+      return;
+    } else if ((date1Parts[2] == date2Parts[2]) && (date1Parts[1] == date2Parts[1]) && (date1Parts[0].compareTo(date2Parts[0]) < 0)) {    // If only the day is earlier
+      MessageCli.BOOKING_NOT_MADE_PAST_DATE.printMessage(options[1], systemDate);
+      return;
+    }
+
+ 
+    if (this.systemDate == null) {                                                                                      // If there is no systemDate
       MessageCli.BOOKING_NOT_MADE_DATE_NOT_SET.printMessage();
-    } else if (venueNameList.isEmpty()) {
+    } else if (venueNameList.isEmpty()) {                                                                               // If there are no venues
       MessageCli.BOOKING_NOT_MADE_NO_VENUES.printMessage();
+    } else {
+      for (int i = 0; i < venueCodeList.size(); i++) {
+        if (venueCodeList.get(i).equals(options[0])) {                                                                  // If there is venue with the given code
+          for (int j = 0; j < venueCodeBookinglist.size(); j++) {
+            if (venueCodeBookinglist.get(j).equals(options[0])) {                                                       // Check if there is a booking for the given date
+              if (bookingDateList.get(j).equals(options[1])) {
+                MessageCli.BOOKING_NOT_MADE_VENUE_ALREADY_BOOKED.printMessage(venueNameList.get(i), options[1]);
+                return;
+              }
+            }
+          }
+        }
+      }
     }
   }
 
