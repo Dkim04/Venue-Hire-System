@@ -12,7 +12,7 @@ public class VenueHireSystem {
   private ArrayList<String> venueCapacityList;
   private ArrayList<String> venueFeeList;
   private String systemDate;
-  private ArrayList<String> venueCodeBookinglist;
+  private ArrayList<String> venueCodeBookingList;
   private ArrayList<String> bookingDateList;
   private ArrayList<String> emailList;
   private ArrayList<String> attendeesList;
@@ -24,7 +24,7 @@ public class VenueHireSystem {
     venueCapacityList = new ArrayList<>();
     venueFeeList = new ArrayList<>();
     systemDate = null;
-    venueCodeBookinglist = new ArrayList<>();
+    venueCodeBookingList = new ArrayList<>();
     bookingDateList = new ArrayList<>();
     emailList = new ArrayList<>();
     attendeesList = new ArrayList<>();
@@ -32,8 +32,8 @@ public class VenueHireSystem {
   }
 
   public String nextAvailableDate(String venueCode, String date) {
-    for (int i = 0; i < venueCodeBookinglist.size(); i++) {
-      if (venueCodeBookinglist.get(i).equals(venueCode)) {
+    for (int i = 0; i < venueCodeBookingList.size(); i++) {
+      if (venueCodeBookingList.get(i).equals(venueCode)) {
         if (bookingDateList.get(i).equals(date)) {                                                                      // If there is a booking on the given date
           String[] dateParts = date.split("/");
 
@@ -108,64 +108,100 @@ public class VenueHireSystem {
     if (venueNameList.size() == 1) {                                                                                    // If there is only one venue
       MessageCli.NUMBER_VENUES.printMessage("is", "one", "");
       for (int i = 0; i < venueNameList.size(); i++) {
-        String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
-        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
+        if (systemDate != null) {
+          String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
+          MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
+        } else {
+          MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+        }
       }
     }
     if (venueNameList.size() == 2) {                                                                                    // If there are two venues
       MessageCli.NUMBER_VENUES.printMessage("are", "two", "s");
       for (int i = 0; i < venueNameList.size(); i++) {
-        String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
-        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
+        if (systemDate != null) {
+          String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
+          MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
+        } else {
+          MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+        }
       }
     }
     if (venueNameList.size() == 3) {                                                                                    // If there are three venues
       MessageCli.NUMBER_VENUES.printMessage("are", "three", "s");
       for (int i = 0; i < venueNameList.size(); i++) {
-        String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
-        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
+        if (systemDate != null) {
+          String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
+          MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
+        } else {
+          MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+        }
       }
     }
     if (venueNameList.size() == 4) {                                                                                    // If there are four venues
       MessageCli.NUMBER_VENUES.printMessage("are", "four", "s");
       for (int i = 0; i < venueNameList.size(); i++) {
-        String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
-        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
+        if (systemDate != null) {
+          String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
+          MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
+        } else {
+          MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+        }
       }
     }
     if (venueNameList.size() == 5) {                                                                                    // If there are five venues
       MessageCli.NUMBER_VENUES.printMessage("are", "five", "s");
       for (int i = 0; i < venueNameList.size(); i++) {
-        String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
-        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
+        if (systemDate != null) {
+          String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
+          MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
+        } else {
+          MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+        }
       }
     }
     if (venueNameList.size() == 6) {                                                                                    // If there are six venues
       MessageCli.NUMBER_VENUES.printMessage("are", "six", "s");
       for (int i = 0; i < venueNameList.size(); i++) {
-        String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
-        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
+        if (systemDate != null) {
+          String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
+          MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
+        } else {
+          MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+        }
       }
     }
     if (venueNameList.size() == 7) {                                                                                    // If there are seven venues
       MessageCli.NUMBER_VENUES.printMessage("are", "seven", "s");
       for (int i = 0; i < venueNameList.size(); i++) {
-        String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
-        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
+        if (systemDate != null) {
+          String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
+          MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
+        } else {
+          MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+        }
       }
     }
     if (venueNameList.size() == 8) {                                                                                    // If there are eight venues
       MessageCli.NUMBER_VENUES.printMessage("are", "eight", "s");
       for (int i = 0; i < venueNameList.size(); i++) {
-        String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
-        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
+        if (systemDate != null) {
+          String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
+          MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
+        } else {
+          MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+        }
       }
     }
     if (venueNameList.size() == 9) {                                                                                    // If there are nine venues
       MessageCli.NUMBER_VENUES.printMessage("are", "nine", "s");
       for (int i = 0; i < venueNameList.size(); i++) {
-        String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
-        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
+        if (systemDate != null) {
+          String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
+          MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
+        } else {
+          MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+        }
       }
     }
     if (venueNameList.size() >= 10) {                                                                                   // If there are ten or more venues                  
@@ -173,8 +209,12 @@ public class VenueHireSystem {
       MessageCli.NUMBER_VENUES.printMessage("are", numberofVenues, "s");
 
       for (int i = 0; i < venueNameList.size(); i++) {
-        String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
-        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
+        if (systemDate != null) {
+          String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
+          MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
+        } else {
+          MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+        }
       }
     }
   }
@@ -266,8 +306,8 @@ public class VenueHireSystem {
     } else {
       for (int i = 0; i < venueCodeList.size(); i++) {
         if (venueCodeList.get(i).equals(options[0])) {                                                                  // If there is venue with the given code
-          for (int j = 0; j < venueCodeBookinglist.size(); j++) {
-            if (venueCodeBookinglist.get(j).equals(options[0])) {                                                       // Check if there is a booking for the given date
+          for (int j = 0; j < venueCodeBookingList.size(); j++) {
+            if (venueCodeBookingList.get(j).equals(options[0])) {                                                       // Check if there is a booking for the given date
               if (bookingDateList.get(j).equals(options[1])) {
                 MessageCli.BOOKING_NOT_MADE_VENUE_ALREADY_BOOKED.printMessage(venueNameList.get(i), options[1]);
                 return;
@@ -281,7 +321,7 @@ public class VenueHireSystem {
           }
 
           String reference = BookingReferenceGenerator.generateBookingReference();
-          venueCodeBookinglist.add(options[0]);                                                                         // Adding the booking to the arraylists
+          venueCodeBookingList.add(options[0]);                                                                         // Adding the booking to the arraylists
           bookingDateList.add(options[1]);
           emailList.add(options[2]);
           attendeesList.add(options[3]);
@@ -297,6 +337,34 @@ public class VenueHireSystem {
 
   public void printBookings(String venueCode) {
     // TODO implement this method
+    int count = 0;
+    int tempindex = 0;
+    for (int j = 0; j < venueCodeList.size(); j++) {
+      if (venueCodeList.get(j).equals(venueCode)) {
+        count = 1;
+        tempindex = j;
+      }
+    }
+
+    for (int i = 0; i < venueCodeBookingList.size(); i++) {
+      if (venueCodeBookingList.get(i).equals(venueCode)) {
+        count = 2;
+      }
+    }
+    
+    if (count == 2) {
+      MessageCli.PRINT_BOOKINGS_HEADER.printMessage(venueNameList.get(tempindex));
+      for (int f = 0; f < venueCodeBookingList.size(); f++) {
+        if (venueCodeBookingList.get(f).equals(venueCode)) {
+          MessageCli.PRINT_BOOKINGS_ENTRY.printMessage(bookingReferenceList.get(f), bookingDateList.get(f));
+        }
+      }
+    } else if (count == 1) {
+      MessageCli.PRINT_BOOKINGS_HEADER.printMessage(venueNameList.get(tempindex));
+      MessageCli.PRINT_BOOKINGS_NONE.printMessage(venueNameList.get(tempindex));
+    } else if (count == 0) {
+      MessageCli.PRINT_BOOKINGS_VENUE_NOT_FOUND.printMessage(venueCode);
+    }
   }
 
   public void addCateringService(String bookingReference, CateringType cateringType) {
