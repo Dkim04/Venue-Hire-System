@@ -31,71 +31,150 @@ public class VenueHireSystem {
     bookingReferenceList = new ArrayList<>();
   }
 
+  public String nextAvailableDate(String venueCode, String date) {
+    for (int i = 0; i < venueCodeBookinglist.size(); i++) {
+      if (venueCodeBookinglist.get(i).equals(venueCode)) {
+        if (bookingDateList.get(i).equals(date)) {                                                                      // If there is a booking on the given date
+          String[] dateParts = date.split("/");
+
+          if (dateParts[0].equals("31") && dateParts[1].equals("01")) {                               // If the given date is the last day of January
+            date = "01/02/" + dateParts[2];
+            return nextAvailableDate(venueCode, date);
+          }
+          else if (dateParts[0].equals("28") && dateParts[1].equals("02")) {                          // If the given date is the last day of February
+            date = "01/03/" + dateParts[2];
+            return nextAvailableDate(venueCode, date);
+          }
+          else if (dateParts[0].equals("31") && dateParts[1].equals("03")) {                          // If the given date is the last day of March
+            date = "01/04/" + dateParts[2];
+            return nextAvailableDate(venueCode, date);
+          }
+          else if (dateParts[0].equals("30") && dateParts[1].equals("04")) {                          // If the given date is the last day of April
+            date = "01/05/" + dateParts[2];
+            return nextAvailableDate(venueCode, date);
+          }
+          else if (dateParts[0].equals("31") && dateParts[1].equals("05")) {                          // If the given date is the last day of May
+            date = "01/06/" + dateParts[2];
+            return nextAvailableDate(venueCode, date);
+          }
+          else if (dateParts[0].equals("30") && dateParts[1].equals("06")) {                          // If the given date is the last day of June
+            date = "01/07/" + dateParts[2];
+            return nextAvailableDate(venueCode, date);
+          }
+          else if (dateParts[0].equals("31") && dateParts[1].equals("07")) {                          // If the given date is the last day of July
+            date = "01/08/" + dateParts[2];
+            return nextAvailableDate(venueCode, date);
+          }
+          else if (dateParts[0].equals("31") && dateParts[1].equals("08")) {                          // If the given date is the last day of August
+            date = "01/09/" + dateParts[2];
+            return nextAvailableDate(venueCode, date);
+          }
+          else if (dateParts[0].equals("30") && dateParts[1].equals("09")) {                          // If the given date is the last day of September
+            date = "01/10/" + dateParts[2];
+            return nextAvailableDate(venueCode, date);
+          }
+          else if (dateParts[0].equals("31") && dateParts[1].equals("10")) {                          // If the given date is the last day of October
+            date = "01/11/" + dateParts[2];
+            return nextAvailableDate(venueCode, date);
+          }
+          else if (dateParts[0].equals("30") && dateParts[1].equals("11")) {                          // If the given date is the last day of November
+            date = "01/12/" + dateParts[2];
+            return nextAvailableDate(venueCode, date);
+          }
+          else if (dateParts[0].equals("31") && dateParts[1].equals("12")) {                          // If the given date is the last day of December
+            String year = Integer.toString((Integer.parseInt(dateParts[2])) + 1);
+            date = "01/01/" + year;
+            return nextAvailableDate(venueCode, date);
+          } else {
+            String day = Integer.toString((Integer.parseInt(dateParts[0])) + 1);
+            if (Integer.parseInt(day) >= 10) {
+              date = day + "/" + dateParts[1] + "/" + dateParts[2];
+            } else {
+              date = "0" + day + "/" + dateParts[1] + "/" + dateParts[2];
+            }
+            return nextAvailableDate(venueCode, date);
+          }
+        }
+      }
+    }
+    return date;                                                                                                        // If there is no booking on the given date then that is the next available date
+  }
+
   public void printVenues() {
     // TODO implement this method
      if (venueNameList.isEmpty()) {                                                                                     // If there are no venues
       MessageCli.NO_VENUES.printMessage();
     } 
-    if (venueNameList.size() == 1) {                                                                                  // If there is only one venue
+    if (venueNameList.size() == 1) {                                                                                    // If there is only one venue
       MessageCli.NUMBER_VENUES.printMessage("is", "one", "");
       for (int i = 0; i < venueNameList.size(); i++) {
-        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+        String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
+        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
       }
     }
-    if (venueNameList.size() == 2) {                                                                                  // If there are two venues
+    if (venueNameList.size() == 2) {                                                                                    // If there are two venues
       MessageCli.NUMBER_VENUES.printMessage("are", "two", "s");
       for (int i = 0; i < venueNameList.size(); i++) {
-        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+        String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
+        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
       }
     }
-    if (venueNameList.size() == 3) {                                                                                  // If there are three venues
+    if (venueNameList.size() == 3) {                                                                                    // If there are three venues
       MessageCli.NUMBER_VENUES.printMessage("are", "three", "s");
       for (int i = 0; i < venueNameList.size(); i++) {
-        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+        String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
+        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
       }
     }
-    if (venueNameList.size() == 4) {                                                                                  // If there are four venues
+    if (venueNameList.size() == 4) {                                                                                    // If there are four venues
       MessageCli.NUMBER_VENUES.printMessage("are", "four", "s");
       for (int i = 0; i < venueNameList.size(); i++) {
-        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+        String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
+        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
       }
     }
-    if (venueNameList.size() == 5) {                                                                                  // If there are five venues
+    if (venueNameList.size() == 5) {                                                                                    // If there are five venues
       MessageCli.NUMBER_VENUES.printMessage("are", "five", "s");
       for (int i = 0; i < venueNameList.size(); i++) {
-        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+        String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
+        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
       }
     }
-    if (venueNameList.size() == 6) {                                                                                  // If there are six venues
+    if (venueNameList.size() == 6) {                                                                                    // If there are six venues
       MessageCli.NUMBER_VENUES.printMessage("are", "six", "s");
       for (int i = 0; i < venueNameList.size(); i++) {
-        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+        String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
+        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
       }
     }
-    if (venueNameList.size() == 7) {                                                                                  // If there are seven venues
+    if (venueNameList.size() == 7) {                                                                                    // If there are seven venues
       MessageCli.NUMBER_VENUES.printMessage("are", "seven", "s");
       for (int i = 0; i < venueNameList.size(); i++) {
-        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+        String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
+        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
       }
     }
-    if (venueNameList.size() == 8) {                                                                                  // If there are eight venues
+    if (venueNameList.size() == 8) {                                                                                    // If there are eight venues
       MessageCli.NUMBER_VENUES.printMessage("are", "eight", "s");
       for (int i = 0; i < venueNameList.size(); i++) {
-        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+        String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
+        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
       }
     }
-    if (venueNameList.size() == 9) {                                                                                  // If there are nine venues
+    if (venueNameList.size() == 9) {                                                                                    // If there are nine venues
       MessageCli.NUMBER_VENUES.printMessage("are", "nine", "s");
       for (int i = 0; i < venueNameList.size(); i++) {
-        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+        String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
+        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
       }
     }
-    if (venueNameList.size() >= 10) {                                                                                 // If there are ten or more venues                  
+    if (venueNameList.size() >= 10) {                                                                                   // If there are ten or more venues                  
       String numberofVenues = String.valueOf(venueNameList.size());
       MessageCli.NUMBER_VENUES.printMessage("are", numberofVenues, "s");
 
       for (int i = 0; i < venueNameList.size(); i++) {
-        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i));
+        String availableDate = nextAvailableDate(venueCodeList.get(i), this.systemDate);
+        MessageCli.VENUE_ENTRY.printMessage(venueNameList.get(i), venueCodeList.get(i), venueCapacityList.get(i), venueFeeList.get(i), availableDate);
       }
     }
   }
@@ -200,7 +279,7 @@ public class VenueHireSystem {
             MessageCli.BOOKING_ATTENDEES_ADJUSTED.printMessage(options[3], Integer.toString(((Integer.parseInt(venueCapacityList.get(i)))/4)), venueCapacityList.get(i));
             options[3] = Integer.toString(((Integer.parseInt(venueCapacityList.get(i)))/4));
           }
-          
+
           String reference = BookingReferenceGenerator.generateBookingReference();
           venueCodeBookinglist.add(options[0]);                                                                         // Adding the booking to the arraylists
           bookingDateList.add(options[1]);
