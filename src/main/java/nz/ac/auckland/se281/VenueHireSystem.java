@@ -17,6 +17,11 @@ public class VenueHireSystem {
   private ArrayList<String> emailList;
   private ArrayList<String> attendeesList;
   private ArrayList<String> bookingReferenceList;
+  private ArrayList<String> cateringList;
+  private ArrayList<CateringType> cateringTypeList;
+  private ArrayList<String> musicList;
+  private ArrayList<String> floralList;
+  private ArrayList<FloralType> floralTypeList;
 
   public VenueHireSystem() {
     venueNameList = new ArrayList<>();
@@ -29,6 +34,11 @@ public class VenueHireSystem {
     emailList = new ArrayList<>();
     attendeesList = new ArrayList<>();
     bookingReferenceList = new ArrayList<>();
+    cateringList = new ArrayList<>();
+    cateringTypeList = new ArrayList<>();
+    musicList = new ArrayList<>();
+    floralList = new ArrayList<>();
+    floralTypeList = new ArrayList<>();
   }
 
   public String nextAvailableDate(String venueCode, String date) {
@@ -370,7 +380,10 @@ public class VenueHireSystem {
   public void addCateringService(String bookingReference, CateringType cateringType) {
     // TODO implement this method
     if (bookingReferenceList.contains(bookingReference)) {
-      return;
+      cateringList.add(bookingReference);
+      cateringTypeList.add(cateringType);
+      String cateringService = "Catering (" + cateringType.getName() + ")";
+      MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(cateringService, bookingReference);
     } else {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Catering", bookingReference);
     }
@@ -378,10 +391,24 @@ public class VenueHireSystem {
   
   public void addServiceMusic(String bookingReference) {
     // TODO implement this method
+    if (bookingReferenceList.contains(bookingReference)) {
+      musicList.add(bookingReference);
+      MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Music", bookingReference);
+    } else {
+      MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Music", bookingReference);
+    }
   }
 
   public void addServiceFloral(String bookingReference, FloralType floralType) {
     // TODO implement this method
+    if (bookingReferenceList.contains(bookingReference)) {
+      floralList.add(bookingReference);
+      floralTypeList.add(floralType);
+      String floralService = "Floral (" + floralType.getName() + ")";
+      MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(floralService, bookingReference);
+    } else {
+      MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Floral", bookingReference);
+    }
   }
 
   public void viewInvoice(String bookingReference) {
