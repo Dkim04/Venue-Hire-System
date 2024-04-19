@@ -3,6 +3,8 @@ package nz.ac.auckland.se281;
 import java.util.ArrayList;
 import nz.ac.auckland.se281.Types.CateringType;
 import nz.ac.auckland.se281.Types.FloralType;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 
 public class VenueHireSystem {
 
@@ -293,16 +295,12 @@ public class VenueHireSystem {
   public void makeBooking(String[] options) {
 
     if (this.systemDate != null) {
-      String[] date1Parts = options[1].split("/");
-      String[] date2Parts = systemDate.split("/");
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-      if (date1Parts[2].compareTo(date2Parts[2]) < 0) {                                                                 // If the year is earlier
-        MessageCli.BOOKING_NOT_MADE_PAST_DATE.printMessage(options[1], systemDate);
-        return;
-      } else if ((date1Parts[2] == date2Parts[2]) && (date1Parts[1].compareTo(date2Parts[1]) < 0)) {                    // If the year is the same but the month is earlier
-        MessageCli.BOOKING_NOT_MADE_PAST_DATE.printMessage(options[1], systemDate);
-        return;
-      } else if ((date1Parts[2] == date2Parts[2]) && (date1Parts[1] == date2Parts[1]) && (date1Parts[0].compareTo(date2Parts[0]) < 0)) {    // If only the day is earlier
+      LocalDate sysDate = LocalDate.parse(this.systemDate, formatter);
+      LocalDate bookDate = LocalDate.parse(options[1], formatter);
+
+      if (bookDate.isBefore(sysDate)) {
         MessageCli.BOOKING_NOT_MADE_PAST_DATE.printMessage(options[1], systemDate);
         return;
       }
@@ -328,6 +326,9 @@ public class VenueHireSystem {
           if (Integer.parseInt(options[3]) < ((Integer.parseInt(venueCapacityList.get(i)))/4)) {                        // If number of attendees is too small
             MessageCli.BOOKING_ATTENDEES_ADJUSTED.printMessage(options[3], Integer.toString(((Integer.parseInt(venueCapacityList.get(i)))/4)), venueCapacityList.get(i));
             options[3] = Integer.toString(((Integer.parseInt(venueCapacityList.get(i)))/4));
+          } else if (Integer.parseInt(options[3]) > Integer.parseInt(venueCapacityList.get(i))) {                      // If number of attendees is too large
+            MessageCli.BOOKING_ATTENDEES_ADJUSTED.printMessage(options[3], venueCapacityList.get(i), venueCapacityList.get(i));
+            options[3] = venueCapacityList.get(i);
           }
 
           String reference = BookingReferenceGenerator.generateBookingReference();
