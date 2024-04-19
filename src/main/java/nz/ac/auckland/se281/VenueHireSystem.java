@@ -413,5 +413,59 @@ public class VenueHireSystem {
 
   public void viewInvoice(String bookingReference) {
     // TODO implement this method
+    int tempi = 0;
+    int tempj = 0;
+    int cateringCost = 0;
+    int musicCost = 0;
+    int floralCost = 0;
+    int totalAmount = 0;
+
+    for (int i = 0; i < bookingReferenceList.size(); i++) {
+      if (bookingReference.equals(bookingReferenceList.get(i))) {
+        tempi = i;
+      }
+    }
+
+    for (int j = 0; j < venueCodeList.size(); j++) {
+      if (venueCodeBookingList.get(tempi).equals(venueCodeList.get(j))) {
+        tempj = j;
+      }
+    }
+
+    MessageCli.INVOICE_CONTENT_TOP_HALF.printMessage(bookingReference, emailList.get(tempi), systemDate, bookingDateList.get(tempi), attendeesList.get(tempi), venueNameList.get(tempj));
+    MessageCli.INVOICE_CONTENT_VENUE_FEE.printMessage(venueFeeList.get(tempj));
+
+    for (int k = 0; k < cateringList.size(); k++) {
+      if (cateringList.get(k).equals(bookingReference)) {
+        Catering catering = new Catering();
+        String cost = catering.getCost(cateringTypeList.get(k), Integer.parseInt(attendeesList.get(tempi)));
+        cateringCost = Integer.parseInt(cost);
+        String cateringType = (cateringTypeList.get(k)).getName();
+        MessageCli.INVOICE_CONTENT_CATERING_ENTRY.printMessage(cateringType, cost);
+      }
+    }
+
+    for (int l = 0; l < musicList.size(); l++) {
+      if (musicList.get(l).equals(bookingReference)) {
+        Music music = new Music();
+        String cost = music.getCost();
+        musicCost = Integer.parseInt(cost);
+        MessageCli.INVOICE_CONTENT_MUSIC_ENTRY.printMessage(cost);
+      }
+    }
+
+    for (int m = 0; m < floralList.size(); m++) {
+      if (floralList.get(m).equals(bookingReference)) {
+        Floral floral = new Floral();
+        String cost = floral.getCost(floralTypeList.get(m));
+        floralCost = Integer.parseInt(cost);
+        String floralType = (floralTypeList.get(m)).getName();
+        MessageCli.INVOICE_CONTENT_FLORAL_ENTRY.printMessage(floralType, cost);
+      }
+    }
+
+    totalAmount = Integer.parseInt(venueFeeList.get(tempj)) + cateringCost + musicCost + floralCost;
+
+    MessageCli.INVOICE_CONTENT_BOTTOM_HALF.printMessage(Integer.toString(totalAmount));
   }
 }
